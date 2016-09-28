@@ -1,42 +1,85 @@
+
+
+var wins = 0;
+var losses = 0;
+var ties = 0;
+
 // prompt the users response
-var userChoice = prompt("Do you choose rock, paper or scissors?");
+document.onkeyup = function(event) {
+    var userChoice = String.fromCharCode(event.keyCode).toLowerCase();
     console.log("User Choice: " + userChoice);
-// randomly select the computer choice
-var computerChoice = Math.random();
-        if (computerChoice < 0.34) {
-        	computerChoice = "rock";
-        } else if(computerChoice <= 0.67) {
-        	computerChoice = "paper";
-        } else {
-        	computerChoice = "scissors";
-        } console.log("Computer: " + computerChoice);
 
 
-compare = function(choice1, choice2){
-    if(choice1 === choice2){
-        return "The result is a tie!";
-    }
+    // randomly select the computer choice
+    var computerChoice = Math.random();
+            if (computerChoice < 0.34) {
+            	computerChoice = "r";
+            } else if(computerChoice <= 0.67) {
+            	computerChoice = "p";
+            } else {
+            	computerChoice = "s";
+            } 
+            console.log("Computer: " + computerChoice);
+            console.log("--------------");
 
-    else if (choice1 === "rock") {
-        if ( choice2 === "scissors"){
-            return "Winner! Rock wins!";
-        } else { 
-            return "Loser, Paper wins"; }   
-    }  
 
-    else if ( choice1 === "paper") {
-        if (choice2 === "rock") {
-            return "Winner! Paper wins";
-        } else { 
-            return "Loser, Scissors wins"; }   
-    }  
+ if((userChoice == 'r') || (userChoice == 'p') || (userChoice == 's')){
 
-    else if (choice1 === "scissors"){
-        if (choice2 === "rock") {
-            return "Loser, Rock Wins"; 
-        } else { 
-            return "Winner! Scissors wins"; }    
-    }    
-};
 
-compare(userChoice, computerChoice);
+        if(userChoice === computerChoice){
+            alert( "The result is a tie!");
+            document.getElementById('message').innerHTML = "Tie Game";
+            ties++;
+        }
+
+        else if (userChoice === "r") {
+            if ( computerChoice === "s"){
+                document.getElementById('message').innerHTML = "Winner! Rock wins";
+                wins++;
+            } else { 
+                document.getElementById('message').innerHTML = "Loser, Paper wins";
+                losses++;
+            }   
+
+        }  
+
+        else if ( userChoice === "p") {
+            if (computerChoice === "r") {
+                document.getElementById('message').innerHTML = "Winner! Paper wins";
+                wins++;
+            } else { 
+                document.getElementById('message').innerHTML = "Loser, Scissor wins";
+                losses++; }   
+        }  
+
+        else if (userChoice === "s"){
+            if (computerChoice === "r") {
+                document.getElementById('message').innerHTML = "Loser, rock wins";
+                losses++;
+            } else { 
+                document.getElementById('message').innerHTML = "Winner! Scissor wins";
+                wins++; }    
+        }   
+
+    var html = 
+        "<p>wins: " + 
+        wins + 
+        "</p>" +
+        "<p>losses: " + 
+        losses + 
+        "</p>" +
+        "<p>ties: " + 
+        ties + 
+        "</p>";
+
+        // Placing the html into the game ID
+        document.getElementById('game').innerHTML = html;
+    } 
+
+
+
+
+else { alert("Please select r, p, or s");}
+
+}; //onkey up
+
