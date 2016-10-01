@@ -27,7 +27,6 @@ document.onkeyup = function(event) {
 
 
         if(userChoice === computerChoice){
-            alert( "The result is a tie!");
             document.getElementById('message').innerHTML = "Tie Game";
             ties++;
         }
